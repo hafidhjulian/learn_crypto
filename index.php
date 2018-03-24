@@ -8,10 +8,10 @@
 </head>
 <body>
     <form action="ubah.php" method="post">
-        <input type="text" name="input" placeholder="Masukkan Inputan">
+        <input type="text" name="key" placeholder="Masukkan Key">
         <br>
         <br>
-        <input type="text" name="plain" placeholder="Masukkan abjad">
+        <input type="text" name="teks" placeholder="Masukkan teks">
         <br>
         <br>
         <input type="submit" name="submit" value="submit">

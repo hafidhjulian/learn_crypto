@@ -1,45 +1,46 @@
 <?php
-    $input = $_POST['input'];
-    $cipherAlphabet= $_POST['plain'];
-    function Cipher($input, $abjadLama, $abjadBaru, &$output)
+    $key= $_POST['key'];
+    $teks= $_POST['teks'];
+    function Cipher($key, $abjadLama, $abjadBaru, &$output)
     {
         $output = "";
-        $inputLen = strlen($input);
+        $inputLen = strlen($key);
     
         if (strlen($abjadLama) != strlen($abjadBaru))
             return false;
     
-        for ($i = 0; $i < $inputLen; $i++)
+        for ($i = 0; $i<$inputLen; $i++)
         {
-            $oldCharIndex = strpos($abjadLama, strtolower($input[$i]));
+            $oldCharIndex = strpos($abjadLama, strtolower($key[$i]));
     
             if ($oldCharIndex !== false)
-                $output .= ctype_upper($input[$i]) ? strtoupper($abjadBaru[$oldCharIndex]) : $abjadBaru[$oldCharIndex];
+                $output .= ctype_upper($key[$i]) ? strtoupper($abjadBaru[$oldCharIndex]) : $abjadBaru[$oldCharIndex];
             else
-                $output .= $input[$i];
+                $output .= $key[$i];
         }
     
         echo "$output";
     }
     
-    function Encipher($input, $cipherAlphabet, &$output)
+    function Encipher($key, $teks, &$output)
     {
-        $plainTeks = "abcdefghijklmnopqrstuvwxyz";
-        return Cipher($input, $plainTeks, $cipherAlphabet, $output);
+        $plainAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        return Cipher($key, $plainAlphabet, $teks, $output);
     }
     
-    function Decipher($input, $cipherAlphabet, &$output)
+    function Decipher($key, $teks, &$output)
     {
-        $plainTeks = "abcdefghijklmnopqrstuvwxyz";
-        return Cipher($input, $cipherAlphabet, $plainTeks, $output);
+        $plainAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        return Cipher($key, $teks, $plainAlphabet, $output);
+
     }
 
     // $text = "Abdurahman";
-    // $cipherAlphabet = "yhkqgvxfoluapwmtzecjdbsnri";
+    // $teks = "yhkqgvxfoluapwmtzecjdbsnri";
     $cipherText;
     $plainText;
 
-    $encipherResult = Encipher($input, $cipherAlphabet, $cipherText);
+    $encipherResult = Encipher($key, $teks, $cipherText);
     echo "<br>\n";
-    $decipherResult = Decipher($cipherText, $cipherAlphabet, $plainText);
-    ?>
+    $decipherResult = Decipher($cipherText, $teks, $plainText);
+?>
